@@ -1,87 +1,33 @@
 #include <unistd.h>
+#include <stdio.h>
 
-void	ligne1(int size);
-int		ft_putchar(char c);
-void	size_space(int size, int space);
-void	ligne_repeat_etage(int etage);
-void	create_etage(int nb_ligne, int *nb_space_start, int *nb_etoile_start);
-
-void	sastantua(int size)
+void sastantua()
 {
-	ligne1(size);
-}
-
-void	ligne1(int size)
-{
-	int j;
-	int start_ligne;
-	int start_etoile;
-	int start_space;
-
-	j = 0;
-	start_etoile = 1;
-	start_ligne = 3;
-	start_space = (size * (size + 1) + 2 * size);
-	while (j < size)
-	{
-		start_space = start_space - 2;
-		create_etage(start_ligne, &start_space, &start_etoile);
-		start_ligne++;
-		start_etoile = start_etoile + 4;
-		j++;
-	}
-}
-
-void	ligne_repeat_etage(int etage)
-{
-	int i;
-	int j;
 	int size;
 
-	i = 0;
-	j = 3 + etage - 1;
-	size = 1;
-	while (i < 3 + etage)
+	printf("number of rows to be displayed:\t");
+	scanf("%d", &size);
+
+	int row;
+	int space;
+	int star;
+	
+	for(row = 1; row  <= size; row++)
 	{
-		size_space(size, j);
-		size += 2;
-		i++;
-		j--;
+	for(space = size -row; space >= 1; space--)
+	{
+	printf(" ");
 	}
+	for(star = 1; star <= (row*2)-1; star++)
+	{
+		printf("*");
+	}
+	printf("\n");
+ }
 }
 
-void	create_etage(int nb_ligne, int *nb_space_start, int *nb_etoile_start)
+int main()
 {
-	int i;
-
-	i = 0;
-	while (i < nb_ligne)
-	{
-		size_space(*nb_etoile_start, *nb_space_start);
-		*nb_space_start = *nb_space_start - 1;
-		*nb_etoile_start += 2;
-		i++;
-	}
-}
-
-void	size_space(int size, int space)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (j < space)
-	{
-		ft_putchar(' ');
-		j++;
-	}
-	ft_putchar('/');
-	while (i < size)
-	{
-		ft_putchar('*');
-		i++;
-	}
-	ft_putchar('\\');
-	ft_putchar('\n');
+	sastantua();
+	return 0;
 }
